@@ -6,12 +6,24 @@ apı='AIzaSyAW0yub2ubO2LJyUyAyts1--47tb2Um_2k'
 # youtube api servisini başlatma 
 youtube=build('youtube', "v3", developerKey=apı)
 
-reques=youtube.videos().list(
-    part="snippet,statistics",
-    chart="mostPopular",
-    regionCode="TR",
-    maxResults=30
-)
+catogori= {
+    "10": "Music",
+    "17": "Sports",
+    "20": "Gaming",
+    "24": "Entertainment",
+    "26": "Howto & Style"
+}
+with pd.ExcelWriter("youtube_cato.xlsx", engine="openpyxl")as writer:
+
+  for cato_id ,cat in catogori.items():
+  
+     reques=youtube.videos().list(
+         part="snippet,statistics",
+         chart="mostPopular",
+         regionCode="TR",
+         videoCategoryId=cato_id,
+         maxResults=30
+     )
 
 response=reques.execute()
 yt=[]
@@ -22,6 +34,7 @@ for video in response['items']:
 
 
     ddvideo={
+        "catogori":cat,
         "Title":video['snippet']['title'],
         "Date":video['snippet']['publishedAt'],
         "liveBroadcastContent":video['snippet']['liveBroadcastContent'],
@@ -30,10 +43,7 @@ for video in response['items']:
 
         "Comment":video['statistics']['commentCount'],
         "View":video['statistics']['viewCount'],
-        "Like":video['statistics']['likeCount'],
-
-        "Caption":video["contentDetails"]['caption']
-    
+        "Like":video['statistics']['likeCount']
 
    
     }
