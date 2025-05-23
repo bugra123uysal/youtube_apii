@@ -1,15 +1,35 @@
 import pandas as pd
 from googleapiclient.discovery import build
+import psycopg2
+from sqlalchemy import create_engine
 
+
+
+base=psycopg2.connect(
+      host="localhost",
+      port="5432",
+      database="youtubeapii",
+      user="postgres",
+      password="4516"
+      
+)
+conne=base.cursor()
+
+e_gin=create_engine("postgresql://postgres:4516@localhost:5432/youtubeapii")
 
 apı='AIzaSyAW0yub2ubO2LJyUyAyts1--47tb2Um_2k'
 # youtube api servisini başlatma 
 youtube=build('youtube', "v3", developerKey=apı)
 
-catogori=[('10','Music'),('17','Sports'),('20','Gaming'),('24','Entertainment')]
+catogori=[('2', 'Autos & Vehicles'),
+    ('10', 'Music'),
+    ('17', 'Sports'),
+    ('20', 'Gaming'),
+    ('24', 'Entertainment'),
+    ('25', 'News & Politics'),
+    ('28', 'Science & Technology')]
 
 yt=[]
-""" with pd.ExcelWriter("youtube_data.xlsx", engine='openpyxl')as writer: """
 for cato_id ,cat in catogori:
        
        
@@ -48,4 +68,5 @@ for cato_id ,cat in catogori:
 dataf=pd.DataFrame(yt)
      
 dataf.to_excel("youtube_data.xlsx", index=True,engine='openpyxl' )
+dataf.to_sql("youtubeapii", e_gin, if_exists="replace", index=False)
   
