@@ -1,9 +1,13 @@
-## python kütüphanesindeki youtube api ile veriler taplandı 
+# youtube api 
+Bu projede, Python kullanılarak YouTube Data API üzerinden belirli ülke ve kategori bazlı video verileri çekidim. Toplanan veriler hem Excel dosyasına hem de PostgreSQL veritabanına kaydedtim. 
 ## python  kütüphaneleri
 import pandas as pd
 from googleapiclient.discovery import build
 import psycopg2
 from sqlalchemy import create_engine
+##  YouTube API Kurulumu
+apı='**********************'
+youtube=build('youtube', "v3", developerKey=apı)
 
 ## 🔗 veri tabanına bağlanma 
 
@@ -45,7 +49,6 @@ dataf.to_sql("youtubeapii", e_gin, if_exists="replace", index=False)
 
 
 
-##
-##
+
 
 
