@@ -4,7 +4,6 @@ import psycopg2
 from sqlalchemy import create_engine
 
 
-
 base=psycopg2.connect(
       host="localhost",
       port="5432",
