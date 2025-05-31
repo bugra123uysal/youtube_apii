@@ -2,6 +2,14 @@
 
 In this project, I used **Python** to retrieve video data from the **YouTube Data API** based on specific **countries** and **categories**. The collected data was saved both to an **Excel file** and a **PostgreSQL database**.
 
+## 📁 Project Overview
+
+- ✅ Extracts data from YouTube for specific countries and categories
+- ✅ Stores data in both Excel and PostgreSQL
+- ✅ Handles missing values
+- ✅ Uses YouTube API for video metadata
+- ✅ Categorizes and filters data efficiently
+
 ---
 ## data types
 Unnamed: 0      int64
